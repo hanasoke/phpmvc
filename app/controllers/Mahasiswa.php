@@ -65,4 +65,13 @@ class Mahasiswa extends Controller {
             exit;
         }
     }
+
+    public function search()
+    {
+        $data['head'] = 'List of Students';
+        $data['mhs'] = $this->model('Mahasiswa_model')->searchDataMahasiswa();
+        $this->view('templates/header', $data);
+        $this->view('mahasiswa/index', $data);
+        $this->view('templates/footer');
+    }
 }
