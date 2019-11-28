@@ -30,18 +30,14 @@ class Mahasiswa_model {
                 ('', :nama, :nim, :email, :jurusan)";
 
         $this->db->query($query);
-        $this->db->bind('nama', $data['name']);
+        $this->db->bind('nama', $data['nama']);
         $this->db->bind('nim', $data['nim']);
         $this->db->bind('email', $data['email']);
-        $this->db->bind('jurusan', $data['major']);
+        $this->db->bind('jurusan', $data['jurusan']);
 
         $this->db->execute();
 
         return $this->db->rowCount();
-
-        // untuk test error tolong command semua code sebelum return 0
-        // return 0;
-
     }
 
     public function hapusDataMahasiswa($id)
@@ -49,6 +45,27 @@ class Mahasiswa_model {
         $query = "DELETE FROM mahasiswa WHERE id =:id";
         $this->db->query($query);
         $this->db->bind('id', $id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function ubahDataMahasiswa($data)
+    {
+        $query = "UPDATE mahasiswa SET
+                nama = :nama,
+                nim = :nim,
+                email = :email,
+                jurusan = :jurusan
+                WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('nim', $data['nim']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('jurusan', $data['jurusan']);
+        $this->db->bind('id', $data['id']);
 
         $this->db->execute();
 
